@@ -30,21 +30,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `GameShop_BD`.`admin`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `GameShop_BD`.`admin` (
-  `idAdmin` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `mdp` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idAdmin`),
-  UNIQUE INDEX `idAdmin_UNIQUE` (`idAdmin` ASC) VISIBLE,
-  UNIQUE INDEX `nom_UNIQUE` (`nom` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `GameShop_BD`.`Jeux`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GameShop_BD`.`Jeux` (
@@ -94,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `GameShop_BD`.`panier` (
   `idpanier` INT NOT NULL AUTO_INCREMENT,
   `idJeux` INT NOT NULL,
   `idUtilisateur` INT NOT NULL,
-  `total` DOUBLE UNSIGNED NULL,
   PRIMARY KEY (`idpanier`),
   UNIQUE INDEX `idpanier_UNIQUE` (`idpanier` ASC) VISIBLE,
   INDEX `fk_panier_Jeux1_idx` (`idJeux` ASC) VISIBLE,
