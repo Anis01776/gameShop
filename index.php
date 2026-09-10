@@ -1,31 +1,54 @@
 <?php
 
-$titre = "GameShop — Trouver des jeux vidéo à prix réduit";
+declare(strict_types=1);
 
-$proprietaire = "Belkahla Anis";
+$titrePage = 'Messages du chapitre 2';
 
-$besoin = "Les jeux vidéo coûtent très cher ces derniers temps et sont rarement en rabais.
-Ce site permet donc de trouver des jeux vidéo à des prix abordables.";
+$messages = [];
+$messageErreur = null;
+try {
+    require __DIR__ . '/config/baseDeDonnee.php';
 
-$utilisateurs = "Les utilisateurs de ce site sont des personnes qui aiment jouer aux jeux 
-vidéo et qui souhaitent économiser de l'argent en achetant des jeux à prix réduit.";
-
-$roles = "1 = Utilisateur
-2 = Administrateur
-3 = Invité";
+    $requete = $pdo->prepare(
+        'SELECT idavis,etoiles
+         FROM avis'
+    );
+    $requete->execute();
+    $messages = $requete->fetchAll();
+} catch (Throwable $exception) {
+    error_log($exception->getMessage());
+    $messageErreur = "Impossible de charger le message" . $exception->getMessage();
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <title><?= htmlspecialchars($titre) ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= htmlspecialchars($titrePage, ENT_QUOTES, 'UTF-8') ?></title>
 </head>
 
 <body>
-    <p>Un site créé par <?= htmlspecialchars($proprietaire) ?></p>
-    <p>Le problème est le suivant : <?= htmlspecialchars($besoin) ?></p>
-    <p>Les utilisateurs sont <?= htmlspecialchars($utilisateurs) ?></p>
-    <p>Trois rôles seront présents sur ce site : <?= htmlspecialchars($roles) ?></p>
+    <?php if ($messageErreur !== null): ?>
+        <p><strong>Erreur :</strong>
+            <?= htmlspecialchars($messageErreur, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+    <?php elseif ($messages === []): ?>
+        <p>Aucun message n'est disponible.</p>
+    <?php else: ?>
+        <?php foreach ($messages as $message): ?>
+            <article>
+                <h2><?= htmlspecialchars($message['titre'], ENT_QUOTES, 'UTF-8') ?></h2>
+                <p><?= nl2br(htmlspecialchars($message['contenu'], ENT_QUOTES, 'UTF-8')) ?></p>
+                <small>
+                    Publié le
+                    <?= htmlspecialchars($message['date_cree'], ENT_QUOTES, 'UTF-8') ?>
+                </small>
+            </article>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
+
+</html>
