@@ -8,7 +8,7 @@ function lireVariableEnv(string $nom): string
 
     if ($valeur === false || $valeur === '') {
         throw new RuntimeException("
-    Variable d'environnement manquante : {$valeur}");
+    Variable d'environnement manquante : {$nom}");
     }
 
     return $valeur;
