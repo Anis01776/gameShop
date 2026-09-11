@@ -1,0 +1,99 @@
+/* ===== Reset simple ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #222;
+    padding: 40px 20px;
+}
+
+/* ===== Grille de jeux ===== */
+.jeux-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== Carte individuelle ===== */
+.jeu-carte {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.jeu-carte:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Titre ===== */
+.jeu-carte h1 {
+    font-size: 1.3rem;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+}
+
+/* ===== Description ===== */
+.jeu-carte .description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* ===== Catégorie (badge) ===== */
+.jeu-carte .categorie {
+    align-self: flex-start;
+    background-color: #e0e0f0;
+    color: #3a3a6a;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 4px;
+}
+
+/* ===== Prix normal ===== */
+.prix-normal {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+/* ===== Bloc réduction ===== */
+.reduction-badge {
+    display: inline-block;
+    background-color: #ff4757;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+    width: fit-content;
+    margin-bottom: 4px;
+}
+
+.prix-rabais {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ff4757;
+}
+
+/* ===== Prix pas de réduction ===== */
+.pas-reduc {
+    color: #999;
+    font-size: 0.85rem;
+    font-style: italic;
+}

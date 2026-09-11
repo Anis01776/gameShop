@@ -39,4 +39,4 @@
 
 <?php
 $contenu = ob_get_clean();
-require __DIR__ . "../vues/gabarit.php";
+require __DIR__ . "/gabarit.php";
