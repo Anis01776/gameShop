@@ -22,3 +22,20 @@ l’adresse locale permettant d’ouvrir l’application, par exemple http://loc
 # http://localhost/gameShop
 les commandes nécessaires pour installer, compiler ou démarrer le projet, s’il y en a;
 #  Aucune compilation nécessaire
+
+les nouveaux prérequis
+# aucun nouveau prerequis
+la reconstruction de la base
+# fichier /BD/base_de_donnee.sql
+la configuration PDO
+# fichier /config/baseDeDonnee.php
+les noms des variables d’environnement sans leurs valeurs secrètes
+# SetEnv DB_HOST 
+# SetEnv DB_PORT 
+# SetEnv DB_DATABASE 
+# SetEnv DB_USERNAME 
+# SetEnv DB_PASSWORD 
+la procédure de démarrage.
+# executer le script de la BD et son script d'insertion au besoin puis ajouter les variables env dans le fichier httpd.conf
+# ensuite ouvrrir AMPPS et verifier si les services sont ouverts et ouvrir le projet dans la page WEB
+
