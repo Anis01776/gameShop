@@ -21,3 +21,13 @@ insert into jeux (nomJeux,prix,description,reduction
 ('Rocket League', 24.99, 'Un jeu de sport melant football et voitures dans des matchs rapides.', 20, 19.99, 'Sport'),
 
 ('Resident Evil Requiem', 69.99, 'Un jeu dhorreur et de survie proposant une aventure intense et angoissante.', 15, 59.49, 'Horreur');
+
+INSERT INTO Utilisateurs (`nomUtilisateur`, `email`, `mdp`)
+VALUES
+  ('AnisB', 'anis.bel@example.com', 'MotDePasse123!');
+
+INSERT INTO avis (`idUtilisateur`, `commentaire`, `etoiles`, `idJeux`)
+VALUES
+  (1, 'Excellent jeu, scénario captivant et graphismes superbes !', 5, 1),
+  (2, 'Bon jeu mais quelques bugs à corriger.', 3, 2),
+  (3, 'Un peu déçu par la durée de vie, sinon correct.', 2, 3);
