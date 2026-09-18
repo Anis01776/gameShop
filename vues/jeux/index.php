@@ -3,7 +3,8 @@
 <div class="jeux-container">
     <?php foreach ($jeux as $jeu): ?>
         <div class="jeu-carte">
-            <h1><?= htmlspecialchars((string)$jeu['nomJeux']) ?></h1>
+            <h1><a href="index.php?action=jeu&idJeux=<?= (int)$jeu['idJeux'] ?>">
+                    <?= htmlspecialchars((string)$jeu['nomJeux']) ?></a></h1>
             <p class="description"><?= htmlspecialchars($jeu['description']) ?></p>
 
             <?php if ($jeu['reduction'] === 1): ?>
