@@ -11,9 +11,9 @@
 <body>
 
     <nav>
-        <a href="index.php">Accueil</a>
-        <a href="recits.php">Recits</a>
-        <a href="jeux.php">Jeux</a>
+        <a href="index.php?action=accueil">Accueil</a>
+        <a href="index.php?action=recits">Recits</a>
+        <a href="index.php">Jeux</a>
     </nav>
     <main>
         <?= $contenu ?>
