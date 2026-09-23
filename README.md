@@ -38,4 +38,6 @@ les noms des variables d’environnement sans leurs valeurs secrètes
 la procédure de démarrage.
 # executer le script de la BD et son script d'insertion au besoin puis ajouter les variables env dans le fichier httpd.conf
 # ensuite ouvrrir AMPPS et verifier si les services sont ouverts et ouvrir le projet dans la page WEB
+Action possibles
+# on peut consulter les avis d'un jeu avec l'option d'en ajouter ou d'en supprimer.
 
