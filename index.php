@@ -87,6 +87,14 @@ try {
             afficherJeux($pdo);
             break;
 
+        case 'recits':
+            require_once __DIR__ . '/vues/recits.php';
+            break;
+        
+        case 'accueil':
+            require_once __DIR__ . '/vues/acceuil.php';
+            break;
+            
         default:
             afficherErreur('Page introuvable.', 404);
     }
