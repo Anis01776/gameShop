@@ -1,7 +1,3 @@
-<?php ob_start(); ?>
-
-<p><a href="index.php?action=jeux">Retour aux jeux</a></p>
-
 <article>
     <h1><?= htmlspecialchars($jeu['nomJeux']) ?></h1>
     <p><?= htmlspecialchars($jeu['description']) ?></p>
@@ -15,8 +11,6 @@
 
     <span><?= htmlspecialchars($jeu['categorie']) ?></span>
 </article>
+<a href="index.php?action=jeu-modifier&id=<?= (int) $jeu['id'] ?>">Modifier</a>
 
 <?php require __DIR__ . '/../avis/liste.php';
-
-$contenu = ob_get_clean();
-require __DIR__ . '/../gabarit.php';

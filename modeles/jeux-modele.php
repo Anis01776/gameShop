@@ -2,28 +2,47 @@
 
 declare(strict_types=1);
 
-function obtenirJeux(PDO $pdo): array
+require_once __DIR__ . "/modele.php";
+
+class Jeux extends Modele
 {
 
-    $requete = $pdo->prepare(
-        'SELECT *
+    public function obtenirJeux(): array
+    {
+        return $this->executer(
+            'SELECT *
         FROM jeux'
-    );
+        )->fetchAll();
+    }
 
-    $requete->execute();
-    return $requete->fetchAll();
-}
-
-function obtenirJeu(PDO $pdo, int $idJeux): ?array
-{
-    $requete = $pdo->prepare(
-        'SELECT * 
+    public function obtenirJeu(int $idJeux): ?array
+    {
+        $jeu = $this->executer('SELECT * 
         FROM jeux
-        WHERE idJeux = :idJeux'
-    );
-    $requete->execute(['idJeux' => $idJeux]);
+        WHERE id = :id', ['id' => $idJeux])->fetch();
 
-    $jeu = $requete->fetch();
-
-    return $jeu ?: null;
+        return $jeu ?: null;
+    }
+    public function modifierJeu(int $idJeux, array $d): void
+    {
+        $this->executer(
+            'UPDATE jeux
+         SET nomJeux = :nomJeux,
+             description = :description,
+             categorie = :categorie,
+             prix = :prix,
+             reduction = :reduction,
+             prixRabais = :prixRabais
+         WHERE id = :id',
+            [
+                'nomJeux'     => $d['nomJeux'],
+                'description' => $d['description'],
+                'categorie'   => $d['categorie'],
+                'prix'        => $d['prix'],
+                'reduction'   => $d['reduction'],
+                'prixRabais'  => $d['prixRabais'],
+                'id'          => $idJeux,
+            ]
+        );
+    }
 }

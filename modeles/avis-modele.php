@@ -2,55 +2,41 @@
 
 declare(strict_types=1);
 
-function obtenirAvis(PDO $pdo, int $idJeux): array
+class Avis extends Modele
 {
-    $requete = $pdo->prepare(
-        'SELECT *
+    public function obtenirAvis(int $idJeux): array
+    {
+        return $this->executer(
+            'SELECT *
         FROM avis
-        WHERE idJeux = :idJeux'
-    );
+        WHERE idJeux = :idJeux',
+            ['idJeux' => $idJeux]
+        )->fetchAll();
+    }
 
-    $requete->execute(['idJeux' => $idJeux]);
+    public function ajouterAvis(/* int $idUser,*/string $commentaire, int $etoiles, int $idJeux): int
+    {
+        $this->executer('INSERT INTO avis (`idUtilisateur`, `commentaire`, `etoiles`, `idJeux`)
+        VALUES (1,:commentaire,:etoiles,:idJeux)', [
+            // 'idUser' => $idUser,
+            'commentaire' => $commentaire,
+            'etoiles' => $etoiles,
+            "idJeux" => $idJeux
+        ]);
+        return (int) $this->pdo->lastInsertId();
+    }
 
-    return $requete->fetchAll();
-}
-
-function ajouterAvis(PDO $pdo,/* int $idUser,*/ string $commentaire, int $etoiles, int $idJeux): int
-{
-    $requete = $pdo->prepare(
-        'INSERT INTO avis (`idUtilisateur`, `commentaire`, `etoiles`, `idJeux`)
-        VALUES (1,:commentaire,:etoiles,:idJeux)'
-    );
-
-    $requete->execute([
-        // 'idUser' => $idUser,
-        'commentaire' => $commentaire,
-        'etoiles' => $etoiles,
-        "idJeux" => $idJeux
-    ]);
-    return (int) $pdo->lastInsertId();
-}
-
-function obtenir1Avis(PDO $pdo, int $idavis): ?array
-{
-    $requete = $pdo->prepare(
-        'SELECT *
+    public function obtenir1Avis(int $idAvis): ?array
+    {
+        $avis = $this->executer('SELECT *
          FROM avis
-         WHERE idavis = :idavis'
-    );
-    $requete->execute(['idavis' => $idavis]);
+         WHERE id = :id', ['id' => $idAvis])->fetch();
 
-    $avis = $requete->fetch();
+        return $avis ?: null;
+    }
 
-    return $avis ?: null;
-}
-
-function supprimerAvis(PDO $pdo, int $idavis): bool
-{
-    $requete = $pdo->prepare(
-        'DELETE FROM avis WHERE idavis = :idavis'
-    );
-    $requete->execute(['idavis' => $idavis]);
-
-    return $requete->rowCount() === 1;
+    public function supprimerAvis(int $idAvis): bool
+    {
+        return  $this->executer('DELETE FROM avis WHERE id = :id', ['id' => $idAvis])->rowCount() === 1;
+    }
 }

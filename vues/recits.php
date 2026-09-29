@@ -1,6 +1,3 @@
-<?php ob_start();
-$titrePage = "Recits"; ?>
-
 <body>
     <p>
         Comme utilisateur, je veux acheter des jeux. Critères 1 : le panier ne peut être vide.
@@ -37,7 +34,5 @@ $titrePage = "Recits"; ?>
         enlever un panier vide. 2 : il faut confirmer la substitution du jeu dans le panier.
     </p>
 </body>
-
-<?php
-$contenu = ob_get_clean();
-require __DIR__ . "/gabarit.php";
+<a href="index.php?action=accueil">Page d'acceuil</a>
+<a href="index.php?action=jeux">Page de Jeux</a>

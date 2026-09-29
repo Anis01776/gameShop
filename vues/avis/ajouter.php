@@ -1,5 +1,3 @@
-<?php ob_start(); ?>
-
 <?php $premierChampErreur = array_key_first($erreurs); ?>
 
 <h1>Ajouter un commentaire</h1>
@@ -38,12 +36,8 @@
         <p id="erreur-commentaire"><?= htmlspecialchars($erreurs['commentaire'], ENT_QUOTES, 'UTF-8') ?></p>
     <?php endif; ?>
 
-    <input type="hidden" name="idJeux" value="<?= (int)$jeu['idJeux'] ?>">
+    <input type="hidden" name="id" value="<?= (int)$jeu['id'] ?>">
 
     <button type="submit">Ajouter</button>
-    <a href="index.php?action=jeu&id=<?= (int) $jeu['idJeux'] ?>">Annuler</a>
+    <a href="index.php?action=jeu&id=<?= (int) $jeu['id'] ?>">Annuler</a>
 </form>
-
-<?php
-$contenu = ob_get_clean();
-require __DIR__ . '/../gabarit.php';
