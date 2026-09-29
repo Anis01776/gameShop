@@ -1,6 +1,3 @@
-<?php ob_start(); 
-$titrePage = "Acceuil";?>
-
 <body>
     <h1>GameShop — Trouver des jeux vidéo à prix réduit</h1>
     <p>Un site créé par Belkahla Anis</p>
@@ -11,8 +8,6 @@ $titrePage = "Acceuil";?>
     <p>Trois rôles seront présents sur ce site : 1 = Utilisateur
         2 = Administrateur
         3 = Invité</p>
+    <a href="index.php?action=recits">Page de Recites</a>
+    <a href="index.php?action=jeux">Page de Jeux</a>
 </body>
-
-<?php
-$contenu = ob_get_clean();
-require __DIR__ . '/gabarit.php';

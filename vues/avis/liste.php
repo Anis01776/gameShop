@@ -1,7 +1,7 @@
 <section>
     <h2>Avis</h2>
     <p>
-        <a href="index.php?action=commentaire-formulaire&idJeux=<?= (int) $jeu['idJeux'] ?>">
+        <a href="index.php?action=commentaire-formulaire&id=<?= (int) $jeu['id'] ?>">
             Ajouter un commentaire
         </a>
     </p>
@@ -16,7 +16,7 @@
                 </small>
             </article>
             <p>
-                <a href="index.php?action=confirmer-suppression&idavis=<?= (int) $avi['idavis'] ?>">
+                <a href="index.php?action=confirmer-suppression&id=<?= (int) $avi['id'] ?>">
                     Supprimer cet avis
                 </a>
 

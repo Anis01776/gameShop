@@ -1,9 +1,7 @@
-<?php ob_start(); ?>
-
 <div class="jeux-container">
     <?php foreach ($jeux as $jeu): ?>
         <div class="jeu-carte">
-            <h1><a href="index.php?action=jeu&idJeux=<?= (int)$jeu['idJeux'] ?>">
+            <h1><a href="index.php?action=jeu&id=<?= (int)$jeu['id'] ?>">
                     <?= htmlspecialchars((string)$jeu['nomJeux']) ?></a></h1>
             <p class="description"><?= htmlspecialchars($jeu['description']) ?></p>
 
@@ -19,6 +17,3 @@
         </div>
     <?php endforeach; ?>
 </div>
-<?php
-$contenu = ob_get_clean();
-require __DIR__ . '/../gabarit.php';

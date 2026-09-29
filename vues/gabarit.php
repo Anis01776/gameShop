@@ -1,3 +1,6 @@
+<?php $baseUrl = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/'; ?>
+<base href="<?= htmlspecialchars($baseUrl, ENT_QUOTES, 'UTF-8') ?>">
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,6 +12,18 @@
 </head>
 
 <body>
+
+    <?php if ($utilisateurCourant !== null): ?>
+        <span><?= htmlspecialchars($utilisateurCourant['nom'], ENT_QUOTES, 'UTF-8') ?></span>
+        <form action="index.php?action=deconnexion" method="post">
+            <input type="hidden" name="jeton_csrf"
+                value="<?= htmlspecialchars(jetonCsrf(), ENT_QUOTES, 'UTF-8') ?>">
+            <button type="submit">Se déconnecter</button>
+        </form>
+    <?php else: ?>
+        <a href="index.php?action=connexion">Connexion</a>
+    <?php endif; ?>
+
 
     <nav>
         <a href="index.php?action=accueil">Accueil</a>
