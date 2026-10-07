@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="styles/dev.css">
 <body>
     <p>
         Comme utilisateur, je veux acheter des jeux. Critères 1 : le panier ne peut être vide.

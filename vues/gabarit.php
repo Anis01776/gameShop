@@ -8,13 +8,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars($titrePage, ENT_QUOTES, 'UTF-8') ?></title>
-    <link rel="stylesheet" href="css/dev.css">
+    <link rel="stylesheet" href="styles/dev.css">
 </head>
 
 <body>
 
     <?php if ($utilisateurCourant !== null): ?>
-        <span><?= htmlspecialchars($utilisateurCourant['nom'], ENT_QUOTES, 'UTF-8') ?></span>
+        <span><?= htmlspecialchars($utilisateurCourant['nomUtilisateur'], ENT_QUOTES, 'UTF-8') ?></span>
         <form action="index.php?action=deconnexion" method="post">
             <input type="hidden" name="jeton_csrf"
                 value="<?= htmlspecialchars(jetonCsrf(), ENT_QUOTES, 'UTF-8') ?>">

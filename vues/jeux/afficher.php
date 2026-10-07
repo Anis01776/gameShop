@@ -1,5 +1,5 @@
 <article>
-    <h1><?= htmlspecialchars($jeu['nomJeux']) ?></h1>
+    <h1><?= htmlspecialchars($jeu['nomJeu']) ?></h1>
     <p><?= htmlspecialchars($jeu['description']) ?></p>
     <?php if ($jeu['reduction'] === 1): ?>
         <span>En réduction</span>

@@ -1,7 +1,7 @@
 <?php $premierChampErreur = array_key_first($erreurs); ?>
 
 <h1>Ajouter un commentaire</h1>
-<p>Article : <?= htmlspecialchars($jeu['nomJeux'], ENT_QUOTES, 'UTF-8') ?></p>
+<p>Article : <?= htmlspecialchars($jeu['nomJeu'], ENT_QUOTES, 'UTF-8') ?></p>
 
 <?php if ($erreurs !== []): ?>
     <div id="resume-erreurs" role="alert">

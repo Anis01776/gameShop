@@ -14,8 +14,8 @@
         value="<?= htmlspecialchars($identifiant, ENT_QUOTES, 'UTF-8') ?>"
         autocomplete="username" required>
 
-    <label for="mot_de_passe">Mot de passe</label>
-    <input id="mot_de_passe" name="mot_de_passe" type="password"
+    <label for="mdp">Mot de passe</label>
+    <input id="mdp" name="mdp" type="password"
         autocomplete="current-password" required>
 
     <button type="submit">Se connecter</button>

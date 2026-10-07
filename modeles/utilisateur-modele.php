@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/Modele.php';
+require_once __DIR__ . '/modele.php';
 
 class Utilisateur extends Modele
 {
@@ -11,23 +11,23 @@ class Utilisateur extends Modele
         $utilisateur = $this->executer(
             'SELECT *
              FROM utilisateurs
-             WHERE identifiant = :identifiant',
-            ['identifiant' => $identifiant]
+             WHERE nomUtilisateur  = :nomUtilisateur',
+            ['nomUtilisateur' => $identifiant]
         )->fetch();
 
         return $utilisateur ?: null;
     }
 
     public function creerUtilisateur(
-        string $identifiant,
+        string $nomUtilisateur,
         string $email,
         string $hachage
     ): int {
         $this->executer(
-            'INSERT INTO utilisateurs (identifiant, email, mot_de_passe)
-         VALUES (:identifiant, :email, :mdp)',
+            'INSERT INTO utilisateurs (nomUtilisateur, email, mdp)
+         VALUES (:nomUtilisateur, :email, :mdp)',
             [
-                'identifiant' => $identifiant,
+                'nomUtilisateur' => $nomUtilisateur,
                 'email' => $email,
                 'mdp' => $hachage
             ]

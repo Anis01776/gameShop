@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="styles/dev.css">
 <body>
     <h1>GameShop — Trouver des jeux vidéo à prix réduit</h1>
     <p>Un site créé par Belkahla Anis</p>
