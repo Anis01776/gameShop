@@ -23,8 +23,8 @@ class Authentification
         session_regenerate_id(true);
         $_SESSION['utilisateur'] = [
             'id' => (int) $utilisateur['id'],
-            'nom' => $utilisateur['nom'],
-            'identifiant' => $utilisateur['identifiant'],
+            'nomUtilisateur' => $utilisateur['nomUtilisateur'],
+            'email' => $utilisateur['email'],
         ];
     }
 

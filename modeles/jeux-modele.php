@@ -27,7 +27,7 @@ class Jeux extends Modele
     {
         $this->executer(
             'UPDATE jeux
-         SET nomJeux = :nomJeux,
+         SET nomJeu = :nomJeu,
              description = :description,
              categorie = :categorie,
              prix = :prix,
@@ -35,7 +35,7 @@ class Jeux extends Modele
              prixRabais = :prixRabais
          WHERE id = :id',
             [
-                'nomJeux'     => $d['nomJeux'],
+                'nomJeu'     => $d['nomJeu'],
                 'description' => $d['description'],
                 'categorie'   => $d['categorie'],
                 'prix'        => $d['prix'],

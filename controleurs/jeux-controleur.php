@@ -40,7 +40,7 @@ class ControleurJeux
         $this->vue->afficher('jeux/afficher', [
             'jeu' => $jeu,
             'avis' => $this->avis->obtenirAvis($idJeux),
-        ], $jeu['nomJeux']);
+        ], $jeu['nomJeu']);
     }
     public function afficherFormulaireModification(int $idJeux): void
     {
@@ -54,7 +54,7 @@ class ControleurJeux
         $this->vue->afficher('jeux/modifier', [
             'jeu' => $jeu,
             'erreurs' => [],
-        ], 'Modifier ' . $jeu['nomJeux']);
+        ], 'Modifier ' . $jeu['nomJeu']);
     }
 
     public function mettreAJourAction(int $idJeux): void
@@ -67,7 +67,7 @@ class ControleurJeux
         $prixRabais = trim((string) ($_POST['prixRabais'] ?? ''));
 
         $donnees = [
-            'nomJeux'     => trim((string) ($_POST['nomJeux'] ?? '')),
+            'nomJeu'     => trim((string) ($_POST['nomJeu'] ?? '')),
             'description' => trim((string) ($_POST['description'] ?? '')),
             'categorie'   => trim((string) ($_POST['categorie'] ?? '')),
             'prix'        => filter_var($_POST['prix'] ?? null, FILTER_VALIDATE_FLOAT),
@@ -77,7 +77,7 @@ class ControleurJeux
 
         $erreurs = [];
 
-        if ($donnees['nomJeux'] === '') {
+        if ($donnees['nomJeu'] === '') {
             $erreurs[] = 'Le nom est obligatoire.';
         }
         if ($donnees['categorie'] === '') {
@@ -109,7 +109,7 @@ class ControleurJeux
 
         $this->jeux->modifierJeu($idJeux, $donnees);
 
-        header('Location: /gameShop/index.php?action=jeu&id=' . $idJeux);
+        header('Location: index.php?action=jeu&id=' . $idJeux);
         exit;
     }
 }

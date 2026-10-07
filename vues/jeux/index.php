@@ -2,7 +2,7 @@
     <?php foreach ($jeux as $jeu): ?>
         <div class="jeu-carte">
             <h1><a href="index.php?action=jeu&id=<?= (int)$jeu['id'] ?>">
-                    <?= htmlspecialchars((string)$jeu['nomJeux']) ?></a></h1>
+                    <?= htmlspecialchars((string)$jeu['nomJeu']) ?></a></h1>
             <p class="description"><?= htmlspecialchars($jeu['description']) ?></p>
 
             <?php if ($jeu['reduction'] === 1): ?>

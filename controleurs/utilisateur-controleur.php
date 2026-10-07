@@ -30,12 +30,12 @@ class ControleurUtilisateur
     public function authentifier(array $donnees): void
     {
         $identifiant = trim((string) ($donnees['identifiant'] ?? ''));
-        $motDePasse = (string) ($donnees['mot_de_passe'] ?? '');
+        $motDePasse = (string) ($donnees['mdp'] ?? '');
         $utilisateur = $this->utilisateurs->trouverParIdentifiant($identifiant);
 
         if (
             $utilisateur === null
-            || !password_verify($motDePasse, $utilisateur['mot_de_passe'])
+            || !password_verify($motDePasse, $utilisateur['mdp'])
         ) {
             $this->connexion('Identifiant ou mot de passe invalide.', $identifiant);
             return;
@@ -65,8 +65,8 @@ class ControleurUtilisateur
     public function creerCompte(array $donnees): void
     {
         $identifiant = trim((string) ($donnees['identifiant'] ?? ''));
-        $motDePasse = (string) ($donnees['mot_de_passe'] ?? '');
-        $motDePasse2 = (string) ($donnees['mot_de_passe2'] ?? '');
+        $motDePasse = (string) ($donnees['mdp'] ?? '');
+        $motDePasse2 = (string) ($donnees['mdp2'] ?? '');
         $email = (string) ($donnees['email'] ?? '');
 
         if ($identifiant === null) {

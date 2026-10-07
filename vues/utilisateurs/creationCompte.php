@@ -23,20 +23,20 @@
 
     <br><br>
 
-    <label for="mot_de_passe">Mot de passe :</label>
+    <label for="mdp">Mot de passe :</label>
     <input
         type="password"
-        id="mot_de_passe"
-        name="mot_de_passe"
+        id="mdp"
+        name="mdp"
         required>
 
     <br><br>
 
-    <label for="mot_de_passe2">Confirmer le mot de passe :</label>
+    <label for="mdp2">Confirmer le mot de passe :</label>
     <input
         type="password"
-        id="mot_de_passe2"
-        name="mot_de_passe2"
+        id="mdp2"
+        name="mdp2"
         required>
 
     <br><br>

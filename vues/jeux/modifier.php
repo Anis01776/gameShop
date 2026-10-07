@@ -19,9 +19,9 @@ $categories = ['Action', 'Aventure', 'RPG', 'Sport', 'Stratégie']; // adapte à
     <input type="hidden" name="id" value="<?= (int) $jeu['id'] ?>">
 
     <div>
-        <label for="nomJeux">Nom</label>
-        <input type="text" id="nomJeux" name="nomJeux" maxlength="100" required
-            value="<?= $e($jeu['nomJeux'] ?? '') ?>">
+        <label for="nomJeu">Nom</label>
+        <input type="text" id="nomJeu" name="nomJeu" maxlength="100" required
+            value="<?= $e($jeu['nomJeu'] ?? '') ?>">
     </div>
 
     <div>
