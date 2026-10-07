@@ -1,5 +1,4 @@
-<?php if ( ?>
-
+<?php
 
 declare(strict_types=1);
 
