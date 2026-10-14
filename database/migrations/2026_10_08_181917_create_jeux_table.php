@@ -19,6 +19,7 @@ return new class extends Migration
             $table->tinyInteger('reduction');
             $table->double('prixRabais')->unsigned()->nullable();
             $table->string('categorie');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

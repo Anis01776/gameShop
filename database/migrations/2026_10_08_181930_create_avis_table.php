@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('avis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur_id')->constrained('users');
+            $table->foreignId('utilisateur_id')->constrained('users')->cascadeOnDelete();
             $table->string('commentaire');
             $table->integer('etoiles');
-            $table->foreignId('jeu_id')->constrained('jeux');
+            $table->foreignId('jeu_id')->constrained('jeux')->cascadeOnDelete();
             $table->timestamps();
         });
     }
