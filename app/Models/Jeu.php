@@ -11,7 +11,7 @@ class Jeu extends Model
     use HasFactory;
     protected $table = 'jeux';
 
-    protected $fillable = ['nomJeu', 'prix', 'description', 'reduction', 'prixRabais', 'categorie', 'published_at'];
+    protected $fillable = ['nomJeu', 'prix', 'description', 'reduction', 'prixRabais', 'categorie', 'image_path', 'published_at'];
 
     protected function casts(): array
     {

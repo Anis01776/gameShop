@@ -7,6 +7,8 @@ use App\Models\Jeu;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class JeuController extends Controller
 {
@@ -35,7 +37,18 @@ class JeuController extends Controller
      */
     public function store(EnregistrerJeuRequest $request): RedirectResponse
     {
-        $jeu = Jeu::create([...$request->validated(), 'published_at' => now(),]);
+        $data = $request->safe()->except('image');
+        $path = $request->file('image')?->store('jeux', 'public');
+
+        try {
+            $jeu = Jeu::create([...$data, 'image_path' => $path, 'published_at' => now(),]);
+        } catch (Throwable $exception) {
+            if ($path) {
+                Storage::disk('public')->delete($path);
+            }
+            throw $exception;
+        }
+
         return redirect()->route('jeux.show', $jeu)
             ->with('status', 'Jeu créé.');
     }
@@ -65,7 +78,21 @@ class JeuController extends Controller
      */
     public function update(EnregistrerJeuRequest $request, Jeu $jeu): RedirectResponse
     {
-        $jeu->update($request->validated());
+        $data = $request->safe()->except('image');
+        $newPath = $request->file('image')?->store('jeux', 'public');
+        $oldPath = $jeu->image_path;
+
+        try {
+            $jeu->update([...$data, ...($newPath ? ['image_path' => $newPath] : [])]);
+        } catch (Throwable $exception) {
+            if ($newPath) {
+                Storage::disk('public')->delete($newPath);
+            }
+        }
+
+        if ($newPath && $oldPath) {
+            Storage::disk('public')->delete($oldPath);
+        }
 
         return redirect()->route('jeux.show', $jeu)
             ->with('status', 'Jeu modifié.');

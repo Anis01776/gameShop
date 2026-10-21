@@ -1,3 +1,8 @@
+<label for="image">Image</label>
+<input id="image" name="image" type="file"
+    accept="image/jpeg,image/png,image/webp">
+@error('image') <p>{{ $message }}</p> @enderror
+
 @csrf
 <label for="nomJeu">Nom du jeu</label>
 <input id="nomJeu" name="nomJeu" value="{{ old('nomJeu', $jeu?->nomJeu) }}">
