@@ -1,0 +1,479 @@
+
+/* ========================================
+   1. Variables et réinitialisation
+======================================== */
+
+:root {
+    --color-bg: #f5f6f8;
+    --color-surface: #ffffff;
+    --color-text: #20242c;
+    --color-muted: #697386;
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-border: #e4e7ec;
+    --color-danger: #dc3545;
+    --color-danger-hover: #b42332;
+    --radius: 12px;
+    --shadow: 0 4px 18px rgba(20, 25, 40, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+h2 {
+    font-size: 1.35rem;
+}
+
+p {
+    margin-top: 0;
+}
+
+::selection {
+    background: #e0e7ff;
+    color: #312e81;
+}
+
+
+/* ========================================
+   2. Sélecteur de langue
+======================================== */
+
+body > form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px max(5%, calc((100% - 1200px) / 2));
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+body > form label {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   3. Contenu principal
+======================================== */
+
+main {
+    width: min(1200px, 90%);
+    min-height: 70vh;
+    margin: 48px auto;
+}
+
+
+/* ========================================
+   4. Boutons et champs
+======================================== */
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: var(--color-primary-hover);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #a5b4fc;
+    outline-offset: 3px;
+}
+
+input:not([type="checkbox"]):not([type="hidden"]),
+textarea,
+select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 8px;
+}
+
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+main label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    font-size: 0.94rem;
+}
+
+main label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+body > form select {
+    width: auto;
+    min-width: 125px;
+}
+
+body > form button {
+    padding: 9px 14px;
+}
+
+
+/* ========================================
+   5. Formulaire de modification
+======================================== */
+
+main form {
+    margin-bottom: 24px;
+}
+
+main form:has(input[name="_method"][value="PATCH"]) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+}
+
+main form:has(input[name="_method"][value="PATCH"]) button {
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+main form:has(input[name="_method"][value="PATCH"]) p {
+    margin: -10px 0 0;
+    color: var(--color-danger);
+    font-size: 0.88rem;
+}
+
+
+/* ========================================
+   6. Liste des jeux
+======================================== */
+
+.jeux-grille {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 28px 0;
+}
+
+.jeux-grille article {
+    min-width: 0;
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jeux-grille article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(20, 25, 40, 0.09);
+}
+
+.jeux-grille h2 {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.jeux-grille h2 a {
+    color: var(--color-text);
+}
+
+.jeux-grille h2 a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+
+/* ========================================
+   7. Recherche dynamique
+======================================== */
+
+#search {
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+
+#search-status {
+    min-height: 24px;
+    margin: 8px 0;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+}
+
+#search-results {
+    display: grid;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+}
+
+#search-results li {
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+}
+
+#search-results:empty {
+    display: none;
+}
+
+
+/* ========================================
+   8. Page de détails d'un jeu
+======================================== */
+
+main > img {
+    width: 100%;
+    max-height: 460px;
+    margin: 24px 0;
+    border-radius: var(--radius);
+    object-fit: contain;
+    background: #e9ebef;
+}
+
+main > article {
+    padding: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow);
+}
+
+main > article h1 {
+    margin-bottom: 14px;
+}
+
+main > article p {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+}
+
+/* Bouton de suppression */
+
+main form:has(input[name="_method"][value="DELETE"]) button {
+    background: var(--color-danger);
+}
+
+main form:has(input[name="_method"][value="DELETE"]) button:hover {
+    background: var(--color-danger-hover);
+}
+
+/* Commentaires */
+
+main > h2 {
+    margin: 38px 0 18px;
+}
+
+main > h2 ~ article {
+    margin-bottom: 14px;
+    padding: 20px 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+}
+
+main > h2 ~ article h3 {
+    margin-bottom: 8px;
+    color: #d97706;
+}
+
+main > h2 ~ article p {
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   9. Pagination Laravel
+======================================== */
+
+nav[role="navigation"] {
+    margin: 32px 0;
+}
+
+nav[role="navigation"] a,
+nav[role="navigation"] span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    margin: 3px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+nav[role="navigation"] a:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+
+/* ========================================
+   10. Responsive
+======================================== */
+
+@media (max-width: 900px) {
+    .jeux-grille {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    main {
+        margin: 32px auto;
+    }
+}
+
+@media (max-width: 600px) {
+    body > form {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 14px 5%;
+    }
+
+    main {
+        width: 92%;
+        margin: 26px auto;
+    }
+
+    .jeux-grille {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .jeux-grille article,
+    main > article {
+        padding: 20px;
+    }
+
+    main form:has(input[name="_method"][value="PATCH"]) {
+        padding: 20px;
+    }
+
+    main > img {
+        max-height: 300px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

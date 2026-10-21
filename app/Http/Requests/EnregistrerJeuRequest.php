@@ -28,6 +28,7 @@ class EnregistrerJeuRequest extends FormRequest
             'description' => ['required', 'string', 'max:200'],
             'reduction' => ['required', 'boolean'],
             'categorie' => ['required', 'string', 'in:Horreur,Action,Aventure,RPG'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 }
