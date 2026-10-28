@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Jeu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'name' => 'Gestionnaire du blogue',
-            'email' => 'gestionnaire@example.test',
+            'name' => 'Administrateur',
+            'email' => 'belcalaanis@gameshop.com',
+            'password' => Hash::make('Anis1234'),
+            'role' => 'manager',
         ]);
 
         Jeu::factory()
@@ -28,5 +31,6 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Jeu::factory()->nonPublie()->create();
+
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 use Throwable;
 
 class JeuController extends Controller
@@ -29,6 +30,7 @@ class JeuController extends Controller
      */
     public function create(): View
     {
+        Gate::authorize('create', Jeu::class);
         return view('jeux.create');
     }
 
@@ -37,6 +39,7 @@ class JeuController extends Controller
      */
     public function store(EnregistrerJeuRequest $request): RedirectResponse
     {
+        Gate::authorize('create', Jeu::class);
         $data = $request->safe()->except('image');
         $path = $request->file('image')?->store('jeux', 'public');
 
@@ -70,6 +73,7 @@ class JeuController extends Controller
      */
     public function edit(Jeu $jeu): View
     {
+        Gate::authorize('update', $jeu);
         return view('jeux.edit', compact('jeu'));
     }
 
@@ -78,6 +82,7 @@ class JeuController extends Controller
      */
     public function update(EnregistrerJeuRequest $request, Jeu $jeu): RedirectResponse
     {
+        Gate::authorize('update', $jeu);
         $data = $request->safe()->except('image');
         $newPath = $request->file('image')?->store('jeux', 'public');
         $oldPath = $jeu->image_path;
@@ -104,6 +109,7 @@ class JeuController extends Controller
 
     public function destroy(Jeu $jeu): RedirectResponse
     {
+        Gate::authorize('delete', $jeu);
         $jeu->delete();
 
         return redirect()->route('jeux.index')

@@ -1,4 +1,3 @@
-
 /* ========================================
    1. Variables et réinitialisation
 ======================================== */
@@ -10,11 +9,16 @@
     --color-muted: #697386;
     --color-primary: #4f46e5;
     --color-primary-hover: #4338ca;
+    --color-primary-soft: #eef2ff;
     --color-border: #e4e7ec;
     --color-danger: #dc3545;
     --color-danger-hover: #b42332;
+    --color-star: #d97706;
     --radius: 12px;
     --shadow: 0 4px 18px rgba(20, 25, 40, 0.05);
+    --shadow-hover: 0 10px 28px rgba(20, 25, 40, 0.09);
+    --page-width: 1200px;
+    --page-gutter: max(5%, calc((100% - var(--page-width)) / 2));
 }
 
 * {
@@ -80,23 +84,124 @@ p {
 
 
 /* ========================================
-   2. Sélecteur de langue
+   2. En-tête : une seule barre
+   [Logo] ········ [Liens] | [Langue]
 ======================================== */
 
-body > form {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 16px max(5%, calc((100% - 1200px) / 2));
-    background: var(--color-surface);
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     border-bottom: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(10px);
 }
 
-body > form label {
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: min(var(--page-width), 90%);
+    min-height: 64px;
+    margin: 0 auto;
+}
+
+/* Logo / nom du site */
+.brand {
+    margin-right: auto;
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.brand:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* Liens de navigation */
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.site-nav form {
     margin: 0;
+}
+
+.site-nav a,
+.site-nav button {
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.site-nav a:hover,
+.site-nav button:hover {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* Bouton d'appel à l'action (Inscription) */
+.site-nav a.nav-cta {
+    background: var(--color-primary);
+    color: #ffffff;
+}
+
+.site-nav a.nav-cta:hover {
+    background: var(--color-primary-hover);
+    color: #ffffff;
+}
+
+/* Sélecteur de langue discret */
+.locale-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding-left: 16px;
+    border-left: 1px solid var(--color-border);
+}
+
+.locale-form select {
+    width: auto;
+    min-width: 0;
+    min-height: 36px;
+    padding: 4px 10px;
+    border-color: transparent;
+    background-color: transparent;
     font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
+}
+
+.locale-form select:hover {
+    background-color: var(--color-primary-soft);
+}
+
+.locale-form button {
+    padding: 6px 10px;
+}
+
+/* Texte accessible, invisible à l'écran */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 
@@ -105,14 +210,29 @@ body > form label {
 ======================================== */
 
 main {
-    width: min(1200px, 90%);
+    width: min(var(--page-width), 90%);
     min-height: 70vh;
-    margin: 48px auto;
+    margin: 40px auto 48px;
+}
+
+main > p {
+    max-width: 70ch;
+}
+
+/* Message de session (->with('status', ...)) */
+.flash {
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--radius);
+    background: #f0fdf4;
+    color: #166534;
+    font-weight: 600;
 }
 
 
 /* ========================================
-   4. Boutons et champs
+   4. Boutons, liens-boutons et champs
 ======================================== */
 
 button,
@@ -134,7 +254,8 @@ button {
     color: #ffffff;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease,
+        color 0.2s ease, transform 0.2s ease;
 }
 
 button:hover {
@@ -142,6 +263,33 @@ button:hover {
 }
 
 button:active {
+    transform: scale(0.98);
+}
+
+/* Liens d'action dans le contenu
+   (Créer un jeu, Modifier, Administration, Retour…) */
+main > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px 12px 0;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    vertical-align: middle;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+main > a:hover {
+    background: var(--color-primary-hover);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+main > a:active {
     transform: scale(0.98);
 }
 
@@ -183,6 +331,18 @@ input[type="file"] {
     padding: 8px;
 }
 
+input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 input[type="checkbox"] {
     width: 17px;
     height: 17px;
@@ -204,28 +364,19 @@ main label:has(input[type="checkbox"]) {
     cursor: pointer;
 }
 
-body > form select {
-    width: auto;
-    min-width: 125px;
-}
-
-body > form button {
-    padding: 9px 14px;
-}
-
 
 /* ========================================
-   5. Formulaire de modification
+   5. Formulaires (connexion, inscription,
+      création, modification, vérification)
 ======================================== */
 
-main form {
-    margin-bottom: 24px;
-}
-
-main form:has(input[name="_method"][value="PATCH"]) {
+/* Tous les formulaires du contenu sont des cartes,
+   sauf celui de suppression (voir section 8). */
+main > form:not(:has(input[name="_method"][value="DELETE"])) {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    max-width: 640px;
+    margin-bottom: 24px;
     padding: 28px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
@@ -233,15 +384,27 @@ main form:has(input[name="_method"][value="PATCH"]) {
     box-shadow: var(--shadow);
 }
 
-main form:has(input[name="_method"][value="PATCH"]) button {
-    align-self: flex-start;
-    margin-top: 8px;
+/* Espacement entre les groupes label + champ */
+main > form > label:not(:first-child),
+main > form > .g-recaptcha {
+    margin-top: 18px;
 }
 
-main form:has(input[name="_method"][value="PATCH"]) p {
-    margin: -10px 0 0;
+/* Messages d'erreur de validation */
+main > form p {
+    margin: 6px 0 0;
     color: var(--color-danger);
     font-size: 0.88rem;
+}
+
+main > form button[type="submit"] {
+    align-self: flex-start;
+    margin-top: 24px;
+}
+
+main > form .g-recaptcha {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 
@@ -268,7 +431,7 @@ main form:has(input[name="_method"][value="PATCH"]) p {
 
 .jeux-grille article:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(20, 25, 40, 0.09);
+    box-shadow: var(--shadow-hover);
 }
 
 .jeux-grille h2 {
@@ -283,6 +446,17 @@ main form:has(input[name="_method"][value="PATCH"]) p {
 .jeux-grille h2 a:hover {
     color: var(--color-primary);
     text-decoration: none;
+}
+
+/* Message « Aucun jeu publié » */
+.jeux-grille > p {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 24px;
+    border: 1px dashed #d0d5dd;
+    border-radius: var(--radius);
+    color: var(--color-muted);
+    text-align: center;
 }
 
 
@@ -318,6 +492,10 @@ main form:has(input[name="_method"][value="PATCH"]) p {
     background: var(--color-surface);
 }
 
+#search-results li a {
+    font-weight: 600;
+}
+
 #search-results:empty {
     display: none;
 }
@@ -326,6 +504,21 @@ main form:has(input[name="_method"][value="PATCH"]) p {
 /* ========================================
    8. Page de détails d'un jeu
 ======================================== */
+
+/* Bouton de suppression (formulaire à côté du lien « Modifier ») */
+main > form:has(input[name="_method"][value="DELETE"]) {
+    display: inline-block;
+    margin: 0 0 12px;
+    vertical-align: middle;
+}
+
+main > form:has(input[name="_method"][value="DELETE"]) button {
+    background: var(--color-danger);
+}
+
+main > form:has(input[name="_method"][value="DELETE"]) button:hover {
+    background: var(--color-danger-hover);
+}
 
 main > img {
     width: 100%;
@@ -354,16 +547,6 @@ main > article p {
     overflow-wrap: anywhere;
 }
 
-/* Bouton de suppression */
-
-main form:has(input[name="_method"][value="DELETE"]) button {
-    background: var(--color-danger);
-}
-
-main form:has(input[name="_method"][value="DELETE"]) button:hover {
-    background: var(--color-danger-hover);
-}
-
 /* Commentaires */
 
 main > h2 {
@@ -373,32 +556,59 @@ main > h2 {
 main > h2 ~ article {
     margin-bottom: 14px;
     padding: 20px 24px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: var(--color-surface);
+    box-shadow: none;
 }
 
 main > h2 ~ article h3 {
     margin-bottom: 8px;
-    color: #d97706;
+    color: var(--color-star);
 }
 
 main > h2 ~ article p {
-    margin-bottom: 0;
-    overflow-wrap: anywhere;
+    color: var(--color-text);
+}
+
+main > h2 ~ p {
+    color: var(--color-muted);
 }
 
 
 /* ========================================
-   9. Pagination Laravel
+   9. Pagination Laravel (vue Tailwind par défaut,
+      rendue sans Tailwind)
 ======================================== */
 
 nav[role="navigation"] {
     margin: 32px 0;
 }
 
+/* Version mobile « Précédent / Suivant » : doublon, on la masque */
+nav[role="navigation"] > div:first-child {
+    display: none;
+}
+
+nav[role="navigation"] > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+}
+
+nav[role="navigation"] p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+nav[role="navigation"] svg {
+    width: 18px;
+    height: 18px;
+}
+
 nav[role="navigation"] a,
-nav[role="navigation"] span {
+nav[role="navigation"] [aria-current="page"] > span,
+nav[role="navigation"] [aria-disabled="true"] > span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -418,6 +628,18 @@ nav[role="navigation"] a:hover {
     text-decoration: none;
 }
 
+nav[role="navigation"] [aria-current="page"] > span {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+nav[role="navigation"] [aria-disabled="true"] > span {
+    color: var(--color-muted);
+    opacity: 0.6;
+}
+
 
 /* ========================================
    10. Responsive
@@ -429,20 +651,32 @@ nav[role="navigation"] a:hover {
     }
 
     main {
-        margin: 32px auto;
+        margin: 32px auto 40px;
     }
 }
 
 @media (max-width: 600px) {
-    body > form {
+    .site-header__inner {
         flex-wrap: wrap;
-        justify-content: flex-start;
-        padding: 14px 5%;
+        gap: 4px 12px;
+        min-height: 0;
+        padding: 10px 0;
+    }
+
+    .site-nav {
+        order: 3;
+        flex-basis: 100%;
+        margin-left: -14px;
+    }
+
+    .locale-form {
+        padding-left: 0;
+        border-left: 0;
     }
 
     main {
         width: 92%;
-        margin: 26px auto;
+        margin: 24px auto 32px;
     }
 
     .jeux-grille {
@@ -451,16 +685,22 @@ nav[role="navigation"] a:hover {
     }
 
     .jeux-grille article,
-    main > article {
-        padding: 20px;
-    }
-
-    main form:has(input[name="_method"][value="PATCH"]) {
+    main > article,
+    main > form:not(:has(input[name="_method"][value="DELETE"])) {
         padding: 20px;
     }
 
     main > img {
         max-height: 300px;
+    }
+
+    main > form button[type="submit"] {
+        align-self: stretch;
+    }
+
+    nav[role="navigation"] > div:last-child {
+        justify-content: center;
+        text-align: center;
     }
 
     button {
