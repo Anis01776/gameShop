@@ -4,6 +4,11 @@
 @section('content')
 <h1>Jeux publiés</h1>
 
+@can('create',App\Models\Jeu::class)
+<a href="{{route('jeux.create')}}">creer un jeu</a>
+@endcan
+
+
 <label for="search">{{ __('interface.search') }}</label>
 <input id="search" type="search" autocomplete="off"
     data-search-url="{{ route('recherche.jeux') }}"

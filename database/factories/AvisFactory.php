@@ -20,7 +20,7 @@ class AvisFactory extends Factory
     public function definition(): array
     {
         return [
-            'utilisateur_id' => User::factory(),
+            'user_id' => User::factory(),
             'commentaire' => fake()->paragraph(3, true),
             'etoiles' => fake()->numberBetween(0, 5),
             'jeu_id' => Jeu::factory(),

@@ -19,6 +19,20 @@
         </select>
         <button type="submit">Appliquer</button>
     </form>
+    @auth
+    <form method="post" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Se déconnecter</button>
+    </form>
+    <form method="get" action="{{ route('account.show') }}">
+        @csrf
+        <button type="submit">Mon compte</button>
+    </form>
+    @else
+    <a href="{{ route('login') }}">Connexion</a>
+    <a href="{{ route('register') }}">Inscription</a>
+    @endauth
+
     <main>
         @yield('content')
     </main>

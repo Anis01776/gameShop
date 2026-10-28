@@ -2,12 +2,18 @@
 @section('title', $jeu->nomJeu)
 
 @section('content')
-<p><a href="{{ route('jeux.edit', $jeu) }}">Modifier</a></p>
+
+@can('update',$jeu)
+<a href="{{ route('jeux.edit', $jeu) }}">Modifier</a>
+@endcan
+
+@can('delete',$jeu)
 <form method="post" action="{{ route('jeux.destroy', $jeu) }}">
     @csrf
     @method('DELETE')
     <button type="submit">Supprimer</button>
 </form>
+@endcan
 
 @if ($jeu->image_path)
 <img src="{{ Storage::disk('public')->url($jeu->image_path) }}"
