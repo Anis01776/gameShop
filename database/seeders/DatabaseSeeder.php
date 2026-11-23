@@ -19,18 +19,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'name' => 'Administrateur',
-            'email' => 'belcalaanis@gameshop.com',
-            'password' => Hash::make('Anis1234'),
+            'name' => env('ADMIN_NAME'),
+            'email' => env('ADMIN_EMAIL'),
+            'password' => Hash::make(env('ADMIN_PASSWORD')),
             'role' => 'manager',
         ]);
 
         Jeu::factory()
             ->count(12)
-            ->has(Avis::factory()->count(2),'avis')
+            ->has(Avis::factory()->count(2), 'avis')
             ->create();
 
         Jeu::factory()->nonPublie()->create();
-
     }
 }
